@@ -11,7 +11,7 @@ namespace ConsoleUI
             //CarTest();
             //CarDetailTest();
 
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
         }
 
         private static void CarDetailTest()

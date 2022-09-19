@@ -33,7 +33,13 @@ namespace Business.Constants
 
         public static string RentalsListed = "Kira bilgileri listelendi";
 
+        public static string CarImageLimitExceded = "Her arabanın maksimum 5 resmi olabilir!";
+
+        public static string CarImageAdded = "Araba resmi eklendi.";
+        public static string CarImageDeleted = "Araba resmi kaldırıldı.";
+        public static string CarImageUpdated = "Araba resmi güncellendi.";
 
 
+        public static string CarImageNotFund = "Araba resmi bulunamadı.";
     }
 }
