@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Business.BusinessAspects.Autofac;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 
 namespace Business.Concrete
 {
@@ -50,6 +52,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
+        [PerformanceAspect(2)]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
@@ -76,6 +79,22 @@ namespace Business.Concrete
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
+        }
+        [CacheRemoveAspect("ICarService.Get")]
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            Add(car);
+            if (car.Description == "x")
+            {
+
+                throw new Exception("Hatalı açıklama girişi!");
+                //return new ErrorDataResult<Car>("Hatalı açıklama girişi");
+            }
+            car.DailyPrice = 1000;
+            Update(car);
+            return new SuccessResult(Messages.CarUpdated);
+
         }
     }
 }
